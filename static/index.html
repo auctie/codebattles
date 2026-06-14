@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeBattle • Real‑time coding duels</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="lobby-container">
+        <div class="lobby-card">
+            <div class="logo">⚔️ CodeBattle</div>
+            <h1>Challenge a friend</h1>
+            <p class="subtitle">Real‑time collaborative coding. Two players. One winner.</p>
+
+            <div class="room-input-group">
+                <input type="text" id="roomName" placeholder="Enter battle room ID" autocomplete="off">
+                <button id="joinBtn">⚡ Join / Create Battle</button>
+            </div>
+
+            <div class="info">
+                <span>🔒 Max 2 players per room</span>
+                <span>📡 Live typing sync</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/lobby.js"></script>
+</body>
+</html>

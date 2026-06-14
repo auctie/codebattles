@@ -1,0 +1,223 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #0b0f19;
+    min-height: 100vh;
+    padding: 1rem;
+    color: #e5e7eb;
+}
+
+.all {
+    width: 100%;
+    margin: 0 auto;
+    background: rgba(20, 20, 35, 0.1);
+    backdrop-filter: blur(4px);
+    border-radius: 2rem;
+    padding: 1rem;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+.logo {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    background: #00f2fe;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Problem section */
+.problem {
+    background: #161b26;
+    border-radius: 1rem;
+    border: 2px solid #24324d;
+    min-height: 25vh;
+}
+.problem-header{
+    background: #1f293d;
+    padding: 1rem 1.5rem;
+    font-weight: 600;
+    border-radius: 1rem 1rem 0 0;
+    color: #e5e7eb;
+    align-items: center;
+    font-size: 1rem;
+    border-bottom: 1px solid #24324d;
+}
+.problem-text {
+    line-height: 1.5;
+    padding: 1rem 1.25rem;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.8rem;
+    color: #e5e7eb;
+}
+.stdout-content {
+    line-height: 1.5;
+    padding: 1rem 1.25rem;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.8rem;
+    color: #e5e7eb;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    border-radius: 0 0 1rem 1rem;
+}
+.answer-field {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    padding: 0 1.5rem;
+    padding-bottom: 1rem;
+}
+#answerField {
+    padding: 0.5rem 0.75rem;
+    background: #2a2a3c;
+    border: 2px solid #24324d;
+    color: #e5e7eb;
+    font-family: inherit;
+    font-size: 0.9rem;
+    width: 20rem;
+    outline: none;
+}
+.submit-answer-btn {
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.4rem 1rem;
+    border-radius: 1rem;
+    background: #06b6d420;
+    color: #00f2fe;
+    border: 2px solid #06b6d4;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+.submit-answer-btn:hover {
+    transform: scale(1.02);
+}
+.answer-feedback {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #f5d78c;
+    background: rgba(0,0,0,0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    display: inline-block;
+}
+
+/* Separator */
+.separator {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #4a4a6a, transparent);
+    margin: 1rem 0;
+}
+
+/* Two columns for editors */
+.editors {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+.editor-panel {
+    flex: 1;
+    min-width: 280px;
+    border-radius: 1rem;
+    border: 2px solid #24324d;
+}
+.panel-title {
+    background: #1f293d;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 1rem 1rem 0 0;
+    align-items: center;
+    font-size: 1rem;
+    color: #e5e7eb;
+    border-bottom: 1px solid #24324d;
+}
+.run-btn {
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.4rem 1rem;
+    border-radius: 1rem;
+    background: #06b6d420;
+    color: #00f2fe;
+    border: 2px solid #06b6d4;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+.run-btn:hover {
+    transform: scale(1.02);
+}
+.code-editor {
+    width: 100%;
+    height: 55vh;
+    min-height: 250px;
+    background: #161b26;
+    border: none;
+    border-radius: 0 0 1rem 1rem;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.85rem;
+    padding: 1.25rem;
+    color: #e2e2e4;
+    resize: none;
+    line-height: 1.5;
+    outline: none;
+}
+.room-status {
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.4rem 1rem;
+    border-radius: 1rem;
+    background: #1e1e2e;
+    border: 2px solid #4a4a6a;
+}
+.room-status.connected {
+    background: #10b98120;
+    color: #34d399;
+    border-color: #10b981;
+}
+.room-status.waiting {
+    background: #f59e0b20;
+    color: #fbbf24;
+    border-color: #f59e0b;
+}
+.room-status.error {
+    background: #ef444420;
+    color: #f87171;
+    border-color: #ef4444;
+}
+
+@media (max-width: 800px) {
+    body {
+        padding: 0.5rem;
+    }
+    .all {
+        width: 100%;
+        padding: 1rem;
+    }
+    .code-editor {
+        height: 40vh;
+    }
+    .problem-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .problem-text {
+        padding-right: 0;
+    }
+    .editors {
+        gap: 1rem;
+    }
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codebattles</title>
+    <link rel="stylesheet" href="/static/styles.css">
+<!--    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="all">
+        <div class="header">
+            <div class="logo">codebattles</div>
+        </div>
+
+        <hr class="separator">
+
+        <div class="problem">
+            <div class="problem-header">
+                <span>Problem</span>
+            </div>
+            <div class="problem-text">
+                text
+            </div>
+            <div class="answer-field">
+                <input type="text" id="answerField" placeholder="Your answer">
+                <button id="submitAnswerBtn" class="submit-answer-btn">Check</button>
+                <div id="answerFeedback" class="answer-feedback"></div>
+            </div>
+        </div>
+
+        <hr class="separator">
+
+        <div class="editors">
+            <div class="editor-panel">
+                <div class="panel-title">
+                    <span>You</span>
+                    <button id="runBtn" class="run-btn">>> Run</button>
+                </div>
+                <textarea id="myEditor" class="code-editor" placeholder="Write your solution here..."></textarea>
+            </div>
+            <div class="editor-panel">
+                <div class="panel-title">
+                    <span>Opponent</span>
+                    <div id="roomStatus" class="room-status waiting">~ Waiting for opponent</div>
+                </div>
+                <textarea id="opponentEditor" class="code-editor" readonly placeholder="Opponent's code will appear here..."></textarea>
+            </div>
+        </div>
+
+        <hr class="separator">
+
+        <div class="problem">
+            <div class="problem-header">Stdout</div>
+            <pre id="stdoutArea" class="stdout-content">Your program output will appear here after clicking Run.</pre>
+        </div>
+
+    </div>
+
+    <script src="/static/battle.js"></script>
+</body>
+</html>
+
