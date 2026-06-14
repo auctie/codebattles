@@ -4,8 +4,10 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from pathlib import Path
 import json
+from database import Database
 
 app = FastAPI()
+db = Database()
 
 # === Path setup ===
 BASE_DIR = Path(__file__).parent
@@ -75,7 +77,8 @@ async def websocket_endpoint(websocket: WebSocket, room_id: str):
         for conn in rooms[room_id]:
             await send_json(conn, {
                 "type": "opponent_joined",
-                "message": "Both players are ready! Start coding."
+                "message": "Both players are ready! Start coding.",
+                "content": db.choose_random(5)
             })
 
     try:

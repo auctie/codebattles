@@ -8,6 +8,7 @@ const stdoutArea = document.getElementById('stdoutArea');
 const answerField = document.getElementById('answerField');
 const submitAnswerBtn = document.getElementById('submitAnswerBtn');
 const answerFeedback = document.getElementById('answerFeedback');
+const problemText = document.getElementById('problemText')
 
 const ws = new WebSocket(`ws://${window.location.host}/ws/${roomId}`);
 
@@ -32,6 +33,7 @@ ws.onmessage = (event) => {
         case 'opponent_joined':
             roomStatusSpan.innerText = '~ Both players joined';
             roomStatusSpan.className = 'room-status connected';
+            problemText.innerText = msg.content[1];
             break;
         case 'opponent_left':
             roomStatusSpan.innerText = '~ Opponent disconnected.';
