@@ -5,8 +5,8 @@
 }
 
 body {
-    font-family: 'Inter', sans-serif;
-    background: #0b0f19;
+    font-family: 'Karla', sans-serif;
+    background: #000000;
     min-height: 100vh;
     padding: 1rem;
     color: #e5e7eb;
@@ -29,9 +29,11 @@ body {
     flex-wrap: wrap;
     gap: 1rem;
 }
+
 .logo {
     font-size: clamp(1.5rem, 5vw, 2.5rem);
-    background: #00f2fe;
+    font-weight: bold;
+    background: #545547;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -39,20 +41,21 @@ body {
 
 /* Problem section */
 .problem {
-    background: #161b26;
+    background: #30302d;
     border-radius: 1rem;
-    border: 2px solid #24324d;
+    border: 2px solid #20201f;
     min-height: 25vh;
+    overflow: hidden; /* ИСПРАВЛЕНИЕ БАГА: подрезает внутренние элементы по скруглению */
 }
 .problem-header{
-    background: #1f293d;
+    background: #20201f;
     padding: 1rem 1.5rem;
     font-weight: 600;
     border-radius: 1rem 1rem 0 0;
     color: #e5e7eb;
     align-items: center;
     font-size: 1rem;
-    border-bottom: 1px solid #24324d;
+    border-bottom: 1px solid #131312;
 }
 .problem-text {
     line-height: 1.5;
@@ -80,9 +83,9 @@ body {
 }
 #answerField {
     padding: 0.5rem 0.75rem;
-    background: #2a2a3c;
-    border: 2px solid #24324d;
-    color: #e5e7eb;
+    background: #3a3a37;
+    border: 2px solid #333330;
+    color: #7a7a72;
     font-family: inherit;
     font-size: 0.9rem;
     width: 20rem;
@@ -93,9 +96,9 @@ body {
     font-weight: 500;
     padding: 0.4rem 1rem;
     border-radius: 1rem;
-    background: #06b6d420;
-    color: #00f2fe;
-    border: 2px solid #06b6d4;
+    background: none;
+    color: #5f5f57;
+    border: 2px solid #5f5f57;
     cursor: pointer;
     transition: transform 0.1s;
 }
@@ -117,7 +120,7 @@ body {
 .separator {
     border: none;
     height: 1px;
-    background: linear-gradient(90deg, transparent, #4a4a6a, transparent);
+    background: linear-gradient(90deg, transparent, #3b3a38, transparent);
     margin: 1rem 0;
 }
 
@@ -132,10 +135,11 @@ body {
     flex: 1;
     min-width: 280px;
     border-radius: 1rem;
-    border: 2px solid #24324d;
+    border: 2px solid #333330; /* ЗАМЕНЕНО НА БЕЖЕВЫЙ */
+    overflow: hidden; /* ИСПРАВЛЕНИЕ БАГА: подрезает внутренние элементы по скруглению */
 }
 .panel-title {
-    background: #1f293d;
+    background: #20201f; /* ЗАМЕНЕНО НА БЕЖЕВЫЙ */
     padding: 0.75rem 1.5rem;
     font-weight: 600;
     display: flex;
@@ -144,16 +148,16 @@ body {
     align-items: center;
     font-size: 1rem;
     color: #e5e7eb;
-    border-bottom: 1px solid #24324d;
+    border-bottom: 1px solid #131312; /* ЗАМЕНЕНО НА БЕЖЕВЫЙ */
 }
 .run-btn {
     font-size: 0.9rem;
     font-weight: 500;
     padding: 0.4rem 1rem;
     border-radius: 1rem;
-    background: #06b6d420;
-    color: #00f2fe;
-    border: 2px solid #06b6d4;
+    background: none; /* ЗАМЕНЕНО НА БЕЖЕВЫЙ */
+    color: #5f5f57; /* ЗАМЕНЕНО НА БЕЖЕВЫЙ */
+    border: 2px solid #5f5f57; /* ЗАМЕНЕНО НА БЕЖЕВЫЙ */
     cursor: pointer;
     transition: transform 0.1s;
 }
@@ -164,7 +168,7 @@ body {
     width: 100%;
     height: 55vh;
     min-height: 250px;
-    background: #161b26;
+    background: #30302d; /* ЗАМЕНЕНО НА БЕЖЕВЫЙ */
     border: none;
     border-radius: 0 0 1rem 1rem;
     font-family: 'Fira Code', monospace;
@@ -180,24 +184,34 @@ body {
     font-weight: 500;
     padding: 0.4rem 1rem;
     border-radius: 1rem;
-    background: #1e1e2e;
-    border: 2px solid #4a4a6a;
+    background: #3a3a37; /* ЗАМЕНЕНО НА БЕЖЕВЫЙ */
+    border: 2px solid #333330; /* ЗАМЕНЕНО НА БЕЖЕВЫЙ */
 }
 .room-status.connected {
-    background: #10b98120;
-    color: #34d399;
-    border-color: #10b981;
+    background: rgba(120, 140, 100, 0.15); /* Переведено в приглушенный бежево-зеленый */
+    color: #a3b899;
+    border-color: #788c64;
 }
 .room-status.waiting {
-    background: #f59e0b20;
-    color: #fbbf24;
-    border-color: #f59e0b;
+    background: rgba(180, 150, 100, 0.15); /* Переведено в приглушенный бежево-желтый */
+    color: #d1be9c;
+    border-color: #b49664;
 }
 .room-status.error {
-    background: #ef444420;
-    color: #f87171;
-    border-color: #ef4444;
+    background: rgba(160, 100, 100, 0.15); /* Переведено в приглушенный бежево-красный */
+    color: #cca3a3;
+    border-color: #a06464;
 }
+
+/* FONTS */
+.font-karla {
+    font-family: "Karla", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+/* end FONTS */
+
 
 @media (max-width: 800px) {
     body {
