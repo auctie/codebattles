@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Karla', sans-serif;
     background: #0b0f19;
     min-height: 100vh;
     padding: 1rem;
@@ -31,6 +31,7 @@ body {
 }
 .logo {
     font-size: clamp(1.5rem, 5vw, 2.5rem);
+    font-weight: bold;
     background: #00f2fe;
     -webkit-background-clip: text;
     background-clip: text;
@@ -44,7 +45,6 @@ body {
     border: 2px solid #24324d;
     min-height: 25vh;
     overflow: hidden;
-
 }
 .problem-header{
     background: #1f293d;
@@ -143,7 +143,7 @@ body {
     align-items: center;
     font-size: 1rem;
     color: #e5e7eb;
-    border-bottom: 1px solid #24324d;
+    border-bottom: 2px solid #24324d;
 }
 .run-btn {
     font-size: 0.9rem;
@@ -197,6 +197,16 @@ body {
     color: #f87171;
     border-color: #ef4444;
 }
+
+/* FONTS */
+.font-karla {
+    font-family: "Karla", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+/* end FONTS */
+
 
 @media (max-width: 800px) {
     body {
