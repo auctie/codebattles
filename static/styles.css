@@ -40,9 +40,11 @@ body {
 /* Problem section */
 .problem {
     background: #161b26;
-    border-radius: 1rem;
+    border-radius: 1.5rem;
     border: 2px solid #24324d;
     min-height: 25vh;
+    overflow: hidden;
+
 }
 .problem-header{
     background: #1f293d;
@@ -52,7 +54,7 @@ body {
     color: #e5e7eb;
     align-items: center;
     font-size: 1rem;
-    border-bottom: 1px solid #24324d;
+    border-bottom: 2px solid #24324d;
 }
 .problem-text {
     line-height: 1.5;
@@ -75,11 +77,11 @@ body {
     display: flex;
     gap: 1rem;
     align-items: center;
-    padding: 0 1.5rem;
+    padding: 0 1rem;
     padding-bottom: 1rem;
 }
 #answerField {
-    padding: 0.5rem 0.75rem;
+    padding: 0.5rem 0.5rem;
     background: #2a2a3c;
     border: 2px solid #24324d;
     color: #e5e7eb;
@@ -91,7 +93,7 @@ body {
 .submit-answer-btn {
     font-size: 0.9rem;
     font-weight: 500;
-    padding: 0.4rem 1rem;
+    padding: 0.5rem 1rem;
     border-radius: 1rem;
     background: #06b6d420;
     color: #00f2fe;
@@ -103,13 +105,9 @@ body {
     transform: scale(1.02);
 }
 .answer-feedback {
-    margin-top: 1rem;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-weight: 500;
-    color: #f5d78c;
-    background: rgba(0,0,0,0.2);
-    padding: 0.5rem 1rem;
-    border-radius: 1rem;
+    padding: 0.5rem 0.5rem;
     display: inline-block;
 }
 
@@ -131,8 +129,9 @@ body {
 .editor-panel {
     flex: 1;
     min-width: 280px;
-    border-radius: 1rem;
+    border-radius: 1.5rem;
     border: 2px solid #24324d;
+    overflow: hidden;
 }
 .panel-title {
     background: #1f293d;

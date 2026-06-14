@@ -1,7 +1,5 @@
-// Get room ID from URL
 const roomId = window.location.pathname.split('/').pop();
 
-// DOM elements
 const myEditor = document.getElementById('myEditor');
 const opponentEditor = document.getElementById('opponentEditor');
 const roomStatusSpan = document.getElementById('roomStatus');
@@ -61,7 +59,6 @@ ws.onclose = (event) => {
     opponentEditor.disabled = true;
 };
 
-// Send code updates on every keystroke
 myEditor.addEventListener('input', () => {
     if (ws.readyState === WebSocket.OPEN) {
         ws.send(JSON.stringify({
@@ -71,7 +68,6 @@ myEditor.addEventListener('input', () => {
     }
 });
 
-// Run button – real code execution via Judge0
 runBtn.addEventListener('click', async () => {
     const code = myEditor.value;
     stdoutArea.innerText = "⏳ Running code...";
@@ -89,7 +85,6 @@ runBtn.addEventListener('click', async () => {
     }
 });
 
-// Answer checking (example)
 submitAnswerBtn.addEventListener('click', () => {
     const answer = answerField.value.trim();
     if (!answer) {
