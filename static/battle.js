@@ -8,7 +8,7 @@ const stdoutArea = document.getElementById('stdoutArea');
 const answerField = document.getElementById('answerField');
 const submitAnswerBtn = document.getElementById('submitAnswerBtn');
 const answerFeedback = document.getElementById('answerFeedback');
-const problemText = document.getElementById('problemText')
+const problemContent = document.getElementById('problemContent')
 
 const ws = new WebSocket(`ws://${window.location.host}/ws/${roomId}`);
 
@@ -72,7 +72,7 @@ myEditor.addEventListener('input', () => {
 
 runBtn.addEventListener('click', async () => {
     const code = myEditor.value;
-    stdoutArea.innerText = "⏳ Running code...";
+    stdoutArea.innerText = "Running code...";
 
     try {
         const response = await fetch('/execute', {
@@ -91,16 +91,16 @@ submitAnswerBtn.addEventListener('click', () => {
     const answer = answerField.value.trim();
     if (!answer) {
         answerFeedback.innerText = 'Provide an answer.';
-        answerFeedback.style.color = '#f87171';
+        answerFeedback.className = 'answer-feedback incorrect';
         return;
     }
 
     if (answer === '42') {
         answerFeedback.innerText = 'Correct! Well done.';
-        answerFeedback.style.color = '#34d399';
+        answerFeedback.className = 'answer-feedback correct';
     } else {
         answerFeedback.innerText = 'Incorrect.';
-        answerFeedback.style.color = '#f87171';
+        answerFeedback.className = 'answer-feedback incorrect';
     }
 });
 
@@ -109,3 +109,18 @@ setInterval(() => {
         ws.send(JSON.stringify({ type: 'ping' }));
     }
 }, 30000);
+
+const savedName = sessionStorage.getItem('playerName');
+if (savedName) {
+    const nameElement = document.getElementById('name');
+    if (nameElement) nameElement.innerText = `${savedName}`;
+} else {
+    fetch('/api/user-data')
+        .then(response => response.json())
+        .then(data => {
+            const playerName = data['name'];
+            sessionStorage.setItem('playerName', playerName);
+            document.getElementById('name').innerText = `${playerName}`;
+        })
+        .catch(err => console.error('Failed to load nickname:', err));
+}

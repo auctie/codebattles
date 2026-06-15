@@ -5,34 +5,37 @@ from fastapi.responses import FileResponse
 from pathlib import Path
 import json
 from database import Database
+import random
 
 app = FastAPI()
 db = Database()
 
-# === Path setup ===
 BASE_DIR = Path(__file__).parent
 STATIC_DIR = BASE_DIR / "static"
 STATIC_DIR.mkdir(exist_ok=True)
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 
-# === In-memory rooms: room_id -> list of WebSocket connections ===
 rooms = {}
 
-# === Helper functions ===
-def send_json(websocket: WebSocket, message: dict):
-    """Send a JSON message to a WebSocket"""
+async def send_json(websocket: WebSocket, message: dict):
     return websocket.send_text(json.dumps(message))
 
-# === Routes ===
 @app.get("/")
 async def welcome():
     return FileResponse(STATIC_DIR / "index.html")
+
+@app.get("/api/user-name")
+async def get_user_data():
+    with open('prefix.txt', 'r', encoding='utf-8') as f:
+        prefix = [item.strip() for item in f]
+    with open('suffix.txt', 'r', encoding='utf-8') as f:
+        suffix = [item.strip() for item in f]
+    return {"name" : random.choice(prefix) + random.choice(suffix)}
 
 @app.get("/battle/{room_id}")
 async def battle_page(room_id: str):
     return FileResponse(STATIC_DIR / "battle.html")
 
-# === Code execution endpoint using Judge0 ===
 @app.post("/execute")
 async def execute_code(request: Request):
     try:
@@ -51,16 +54,40 @@ async def execute_code(request: Request):
     except Exception as e:
         return {"output": f"Execution error: {str(e)}"}
 
-# === WebSocket endpoint with protocol ===
+active_players = {}
+
+@app.websocket("/ws/lobby")
+async def lobby_websocket(websocket: WebSocket):
+    await websocket.accept()
+
+    player_name = websocket.query_params.get("name", "default")
+    player_id = websocket.query_params.get("id", "default")
+
+    active_players[player_id] = {"name": player_name, "id": player_id, "ws": websocket}
+
+    players_list = [{"id": info["id"], "name": info["name"]} for pid, info in active_players.items() if player_id]
+    await send_json(websocket, {"type": "online_list", "players": players_list})
+
+    for pid, info in active_players.items():
+        if pid != player_id:
+            await send_json(info['ws'], {"type": "player_joined", "player": {"name": player_name, "id": player_id}})
+
+    try:
+        while True:
+            await websocket.receive_text()
+    except WebSocketDisconnect:
+        del active_players[player_id]
+        for pid, info in active_players.items():
+            await send_json(info['ws'], {"type": "player_left", "player": {"name": player_name, "id": player_id}})
+
+
 @app.websocket("/ws/{room_id}")
 async def websocket_endpoint(websocket: WebSocket, room_id: str):
     await websocket.accept()
 
-    # Create room if not exists
     if room_id not in rooms:
         rooms[room_id] = []
 
-    # Enforce max 2 players
     if len(rooms[room_id]) >= 2:
         await send_json(websocket, {
             "type": "error",
@@ -69,10 +96,8 @@ async def websocket_endpoint(websocket: WebSocket, room_id: str):
         await websocket.close(code=1008)
         return
 
-    # Add to room
     rooms[room_id].append(websocket)
 
-    # Notify both players when room is ready (2 players)
     if len(rooms[room_id]) == 2:
         for conn in rooms[room_id]:
             await send_json(conn, {
@@ -84,7 +109,6 @@ async def websocket_endpoint(websocket: WebSocket, room_id: str):
     try:
         while True:
             raw = await websocket.receive_text()
-            # Parse JSON
             try:
                 msg = json.loads(raw)
             except json.JSONDecodeError:
@@ -94,11 +118,9 @@ async def websocket_endpoint(websocket: WebSocket, room_id: str):
                 })
                 continue
 
-            # Validate message type
             msg_type = msg.get("type")
             if msg_type == "update_code":
                 content = msg.get("content", "")
-                # Forward to the other client in the same room
                 for conn in rooms[room_id]:
                     if conn != websocket:
                         await send_json(conn, {
@@ -114,7 +136,6 @@ async def websocket_endpoint(websocket: WebSocket, room_id: str):
                 })
 
     except WebSocketDisconnect:
-        # Remove disconnected client
         if websocket in rooms[room_id]:
             rooms[room_id].remove(websocket)
         if not rooms[room_id]:

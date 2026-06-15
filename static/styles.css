@@ -31,11 +31,13 @@ body {
 }
 .logo {
     font-size: clamp(1.5rem, 5vw, 2.5rem);
-    font-weight: bold;
-    background: #00f2fe;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    font-weight: 600;
+    color: #00f2fe;
+}
+.nickname {
+    font-size: clamp(1rem, 3.5vw, 2rem);
+    font-weight: 400;
+    color: #d500f9;
 }
 
 /* Problem section */
@@ -46,7 +48,7 @@ body {
     min-height: 25vh;
     overflow: hidden;
 }
-.problem-header{
+.problem-header {
     background: #1f293d;
     padding: 1rem 1.5rem;
     font-weight: 600;
@@ -56,7 +58,7 @@ body {
     font-size: 1rem;
     border-bottom: 2px solid #24324d;
 }
-.problem-text {
+.problem-content {
     line-height: 1.5;
     padding: 1rem 1.25rem;
     font-family: 'Fira Code', monospace;
@@ -73,7 +75,7 @@ body {
     overflow-wrap: break-word;
     border-radius: 0 0 1rem 1rem;
 }
-.answer-field {
+.answer {
     display: flex;
     gap: 1rem;
     align-items: center;
@@ -90,25 +92,17 @@ body {
     width: 20rem;
     outline: none;
 }
-.submit-answer-btn {
-    font-size: 0.9rem;
-    font-weight: 500;
-    padding: 0.5rem 1rem;
-    border-radius: 1rem;
-    background: #06b6d420;
-    color: #00f2fe;
-    border: 2px solid #06b6d4;
-    cursor: pointer;
-    transition: transform 0.1s;
-}
-.submit-answer-btn:hover {
-    transform: scale(1.02);
-}
 .answer-feedback {
     font-size: 0.9rem;
     font-weight: 500;
     padding: 0.5rem 0.5rem;
     display: inline-block;
+}
+.answer-feedback.correct {
+    color: #34d399;
+}
+.answer-feedback.incorrect {
+    color: #34d399;
 }
 
 /* Separator */
@@ -126,14 +120,14 @@ body {
     margin-bottom: 1rem;
     flex-wrap: wrap;
 }
-.editor-panel {
+.panel {
     flex: 1;
     min-width: 280px;
     border-radius: 1.5rem;
     border: 2px solid #24324d;
     overflow: hidden;
 }
-.panel-title {
+.panel-header {
     background: #1f293d;
     padding: 0.75rem 1.5rem;
     font-weight: 600;
@@ -145,7 +139,7 @@ body {
     color: #e5e7eb;
     border-bottom: 2px solid #24324d;
 }
-.run-btn {
+.button {
     font-size: 0.9rem;
     font-weight: 500;
     padding: 0.4rem 1rem;
@@ -156,7 +150,7 @@ body {
     cursor: pointer;
     transition: transform 0.1s;
 }
-.run-btn:hover {
+.button:hover {
     transform: scale(1.02);
 }
 .code-editor {
@@ -179,23 +173,16 @@ body {
     font-weight: 500;
     padding: 0.4rem 1rem;
     border-radius: 1rem;
-    background: #1e1e2e;
-    border: 2px solid #4a4a6a;
+    border: 2px solid transparent;
 }
 .room-status.connected {
-    background: #10b98120;
     color: #34d399;
-    border-color: #10b981;
 }
 .room-status.waiting {
-    background: #f59e0b20;
     color: #fbbf24;
-    border-color: #f59e0b;
 }
 .room-status.error {
-    background: #ef444420;
     color: #f87171;
-    border-color: #ef4444;
 }
 
 /* FONTS */

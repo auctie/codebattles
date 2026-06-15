@@ -12,7 +12,8 @@
 <body>
     <div class="all">
         <div class="header">
-            <div class="logo">codebattles</div>
+            <div class="logo">kotbattles</div>
+            <div class="nickname" id="name"></div>
         </div>
 
         <hr class="separator">
@@ -21,28 +22,28 @@
             <div class="problem-header">
                 <span>Problem</span>
             </div>
-            <div id="problemText" class="problem-text">
+            <div class="problem-content" id="problemContent">
                 text
             </div>
-            <div class="answer-field">
+            <div class="answer">
                 <input type="text" id="answerField" placeholder="Your answer">
-                <button id="submitAnswerBtn" class="submit-answer-btn">Check</button>
-                <div id="answerFeedback" class="answer-feedback"></div>
+                <button class="button" id="submitAnswerBtn">Check</button>
+                <div class="answer-feedback" id="answerFeedback"></div>
             </div>
         </div>
 
         <hr class="separator">
 
         <div class="editors">
-            <div class="editor-panel">
-                <div class="panel-title">
+            <div class="panel">
+                <div class="panel-header">
                     <span>You</span>
-                    <button id="runBtn" class="run-btn">>> Run</button>
+                    <button class="button" id="runBtn" >>> Run</button>
                 </div>
                 <textarea id="myEditor" class="code-editor" placeholder="Write your solution here..."></textarea>
             </div>
-            <div class="editor-panel">
-                <div class="panel-title">
+            <div class="panel">
+                <div class="panel-header">
                     <span>Opponent</span>
                     <div id="roomStatus" class="room-status waiting">~ Waiting for opponent</div>
                 </div>

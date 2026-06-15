@@ -3,27 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeBattle • Real‑time coding duels</title>
+    <title>Codebattles</title>
     <link rel="stylesheet" href="/static/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="lobby-container">
-        <div class="lobby-card">
-            <div class="logo">⚔️ CodeBattle</div>
-            <h1>Challenge a friend</h1>
-            <p class="subtitle">Real‑time collaborative coding. Two players. One winner.</p>
-
-            <div class="room-input-group">
-                <input type="text" id="roomName" placeholder="Enter battle room ID" autocomplete="off">
-                <button id="joinBtn">⚡ Join / Create Battle</button>
-            </div>
-
-            <div class="info">
-                <span>🔒 Max 2 players per room</span>
-                <span>📡 Live typing sync</span>
-            </div>
+    <div class="all">
+        <div class="header">
+            <div class="logo">kotbattles</div>
+            <div class="nickname" id="name"></div>
         </div>
+
+        <hr class="separator">
+
+
+        <div class="room-input-group">
+            <input type="text" id="roomName" placeholder="Enter room ID" autocomplete="off">
+            <button id="joinBtn">Join / Create Battle</button>
+        </div>
+
+        <button id="showPlayersBtn">Show Online Players</button>
+        <div id="playerListContainer" style="display: none;">
+            <h3>Online Players</h3>
+            <ul id="playerList"></ul>
+        </div>
+
     </div>
 
     <script src="/static/lobby.js"></script>
