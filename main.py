@@ -18,7 +18,7 @@ app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 rooms = {}
 
 async def send_json(websocket: WebSocket, message: dict):
-    return websocket.send_text(json.dumps(message))
+    await websocket.send_text(json.dumps(message))
 
 @app.get("/")
 async def welcome():
