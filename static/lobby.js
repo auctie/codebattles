@@ -18,7 +18,7 @@ if (!playerId) {
 }
 
 function startWebSocket(name, id) {
-    const ws = new WebSocket(`ws://${location.host}/ws/lobby?name=${encodeURIComponent(name)}&id=${encodeURIComponent(id)}`);
+    const ws = new WebSocket(`/ws/lobby?name=${encodeURIComponent(name)}&id=${encodeURIComponent(id)}`);
     ws.onopen = () => console.log(`${id} connected to lobby`);
     ws.onmessage = (event) => {
         const msg = JSON.parse(event.data);

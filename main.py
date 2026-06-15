@@ -6,6 +6,9 @@ from pathlib import Path
 import json
 from database import Database
 import random
+import os
+
+ENV = os.getenv("ENVIRONMENT", "development")
 
 app = FastAPI()
 db = Database()
@@ -13,16 +16,22 @@ db = Database()
 BASE_DIR = Path(__file__).parent
 STATIC_DIR = BASE_DIR / "static"
 STATIC_DIR.mkdir(exist_ok=True)
-app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
+
+if ENV == "development":
+    app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
+
+@app.get("/")
+async def welcome():
+    return FileResponse(STATIC_DIR / "index.html")
+
+@app.get("/battle/{room_id}")
+async def battle_page(room_id: str):
+    return FileResponse(STATIC_DIR / "battle.html")
 
 rooms = {}
 
 async def send_json(websocket: WebSocket, message: dict):
     await websocket.send_text(json.dumps(message))
-
-@app.get("/")
-async def welcome():
-    return FileResponse(STATIC_DIR / "index.html")
 
 @app.get("/api/user-name")
 async def get_user_data():
@@ -31,10 +40,6 @@ async def get_user_data():
     with open('suffix.txt', 'r', encoding='utf-8') as f:
         suffix = [item.strip() for item in f]
     return {"name" : random.choice(prefix) + random.choice(suffix)}
-
-@app.get("/battle/{room_id}")
-async def battle_page(room_id: str):
-    return FileResponse(STATIC_DIR / "battle.html")
 
 @app.post("/execute")
 async def execute_code(request: Request):

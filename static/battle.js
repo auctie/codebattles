@@ -10,7 +10,7 @@ const submitAnswerBtn = document.getElementById('submitAnswerBtn');
 const answerFeedback = document.getElementById('answerFeedback');
 const problemContent = document.getElementById('problemContent')
 
-const ws = new WebSocket(`ws://${window.location.host}/ws/${roomId}`);
+const ws = new WebSocket(`/ws/${roomId}`);
 
 ws.onopen = () => {
     roomStatusSpan.innerText = '~ Waiting for opponent';
